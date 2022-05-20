@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  web:
+    container_name: web
+    build: ./web
+    volumes:
+      - ./web/src:/usr/src
+    command: sh -c "cd react-markdown-wiki && yarn start"
+    ports:
+      - "3000:3000"
+
+  flask:
+    container_name: api
+    build: ./api
+    volumes:
+      - ./api/src:/usr/src
+    command: flask run --host 0.0.0.0 --port 5000
+    ports:
+      - "5000:5000"
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    build: ./db
+    volumes:
+      - ./db/database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+    ports:
+      - "3306:3306"
+
