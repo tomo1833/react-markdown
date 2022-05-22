@@ -1,3 +1,4 @@
-export default function LinkWithIcon() {
-  return (<><div></div></>);
+
+export default function TextWithIcon() {
+    return (<><Box></Box></>);
 }

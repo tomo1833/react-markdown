@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 
 import {
-  AppBar,
   Box,
   Container,
   createTheme,
   ThemeProvider,
-  Toolbar,
 } from "@mui/material";
 
 
@@ -42,17 +40,12 @@ export default function HomeTemplate() {
           height: "100vh"
         }}
       >
-        <AppBar position="relative" >
-          <HeaderNavigation />
-        </AppBar>
-        <Box >
-          <Toolbar sx={{ backgroundColor: "#1976d2" }}>サブヘッダ</Toolbar>
-        </Box>
+        <HeaderNavigation />
         <Box component="main" >
-          <Container maxWidth="xl" sx={{display: "flex", flexDirection: "column"}}>
+          <Container maxWidth="xl" sx={{ display: "flex", flexDirection: "column" }}>
             {text.map((markdown) => {
               return (
-                <Link to={markdown.url}>
+                <Link key={markdown.url} to={markdown.url}>
                   {markdown.title}
                 </Link>
               )
